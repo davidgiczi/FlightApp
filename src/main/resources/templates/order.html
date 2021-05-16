@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	 xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="layouts/main_user">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{title}"></title>
+</head>
+<body>
+
+<div layout:fragment="order">
+<h1 th:text="#{order.form}"></h1>
+
+<hr>
+<br>
+<div id="registForm">
+<br>
+<br>
+<form th:action="@{/flight/reserve}" method="post" th:object="${ticket}">
+<h4 th:text="#{departure.date}"></h4>
+<input id="dep-date" onblur="getArrivalDate()" type="date" th:field="*{{departureDate}}"  th:min="${date}" required="required"/><br>
+<h4 th:text="#{departure.place}"></h4>
+<select th:field="*{departurePlace}" class="selection" required="required">
+<option value="">---</option>
+<option th:each="depPlace: ${departurePlaces}" 
+th:value="${depPlace}" th:text="${depPlace}">
+</option>
+</select>
+<br>
+<h4 th:text="#{arrival.date}"></h4>
+<input id="arr-date" type="text" th:field="*{{arrivalDate}}" required="required" readonly="readonly"/><br>
+<h4 th:text="#{arrival.place}"></h4>
+<select th:field="*{arrivalPlace}" class="selection" required="required">
+<option value="">---</option>
+<option th:each="arrPlace: ${arrivalPlaces}" 
+th:value="${arrPlace}" th:text="${arrPlace}">
+</option>
+</select>
+<h4 th:text="#{flight.number}"></h4>
+<select th:field="*{flightNumber}" class="selection" required="required">
+<option value="">---</option>
+<option th:each="plane: ${planes}" 
+th:value="${plane}" th:text="${plane}">
+</option>
+</select>
+<h4 th:text="#{price}"></h4>
+<input type="number" class="order_price"  th:field="*{price}" th:min="${cost}" step="500" required="required"/><br>
+
+<br><br><br>
+<input type="submit" id=regist-submit-btn th:value="#{send}">
+</form>
+</div>
+
+<input type="hidden" th:if="${param.changedPass}"  th:value="#{password.changed}" id="changePassMsg">
+</div>
+
+</body>
+</html>

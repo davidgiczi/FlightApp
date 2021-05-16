@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/flight-css/flight.css}">
+<title></title>
+</head>
+<body>
+<input id="search-value" type="hidden" th:value="${txt}">
+
+<select id="langSelect" onchange="setLanguage()">
+<option th:value="#{lang}" th:text="#{lang}"></option>
+<option th:if="#{lang} == 'HU'">EN</option>
+<option th:if="#{lang} == 'EN'">HU</option>
+</select>
+<br><br>
+ 
+<a id="signout" sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{sign.out}"></a>
+<br><br>
+<div id="auth" sec:authorize="isAuthenticated()">
+ <span th:text="#{auth}"></span><b><span sec:authentication="name"></span></b></div>
+ 
+
+<div layout:fragment="clients"></div>
+<div layout:fragment="client_reservations"></div>
+<div layout:fragment="modify_ticket"></div>
+</body>
+<script type="text/javascript" th:src="@{/flight-js/flight-js.js}"></script>
+</html>

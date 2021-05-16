@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/main_admin">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{title}"></title>
+</head>
+<body>
+
+<input id="search-value" type="hidden" th:value="${txt}">
+
+<div layout:fragment="client_reservations">
+<h1 th:text="#{client.reservations}"></h1>
+<a th:href="@{/admin/clients}" th:text="#{go.clients}"></a>
+<table><tr>
+		<td id="clients" th:text="${client.firstName}"></td>
+		<td th:text="${client.lastName}"></td>
+		<td th:text="${client.dateOfBirth}"></td>
+		<td th:text="${client.username}"></td>
+		<td th:text="${client.password}"></td>
+		</tr>
+ 
+
+</table>
+<hr>
+<input id="search-field" th:onkeyup="'searchTicketByAdmin(\'' + ${passengerId} + '\')'" type="text" th:placeholder="#{search}">
+<div id="empty" th:if="${#lists.isEmpty(orderedTickets)}" th:text="#{empty}"></div>
+
+<table th:if="${not #lists.isEmpty(orderedTickets)}">
+	<tr>
+	<th th:text="#{number}"></th>
+	<th th:text="#{departure.date}"></th>
+	<th th:text="#{departure.place}"></th>
+	<th th:text="#{arrival.date}"></th>
+	<th th:text="#{arrival.place}"></th>
+	<th th:text="#{flight.number}"></th>
+	<th th:text="#{price}"></th>
+	<th th:text="#{cancelled}"></th>
+	<th th:text="#{modify}"></th>
+	<th th:text="#{del}"></th>
+	</tr>
+	<tr th:each="ticket : ${orderedTickets}">
+	<td th:utext="${ticketStat.count}" th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext="${ticket.departureDate}" th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext=${ticket.departurePlace} th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext="${ticket.arrivalDate}" th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext=${ticket.arrivalPlace} th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext=${ticket.flightNumber} th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext=${ticket.price} th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:classappend="${ticketStat.odd} ? '' : 'colored'"><a th:onclick="'activateTicket(\'' + ${ticket.id} + '\');'" th:utext=${ticket.cancelled}></a></td>
+	<td th:classappend="${ticketStat.odd} ? '' : 'colored'"><a th:onclick="'goModifyPage(\'' + ${ticket.id} + '\')'" th:text="#{modify}"></a></td>
+	<td th:classappend="${ticketStat.odd} ? '' : 'colored'"><a th:onclick="'deleteTicket(\'' + ${ticket.id} + '\');'" th:text="#{del}"></a></td>
+	</tr>
+
+</table>
+
+<input type="hidden" th:value="#{delete.ticket.message}" id="deleteTicket">
+
+</div>
+
+</body>
+</html>

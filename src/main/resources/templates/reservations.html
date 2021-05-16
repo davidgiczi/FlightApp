@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/main_user">
+<head>
+
+<meta charset="UTF-8">
+<title th:text="#{store.title}"></title>
+</head>
+<body>
+
+
+
+<div layout:fragment="reservations">
+
+<h1 th:text="#{reservations}"></h1>
+
+<div id="empty" th:if="${#lists.isEmpty(orderedTickets)}" th:text="#{empty}"></div>
+
+	<table th:if="${not #lists.isEmpty(orderedTickets)}" id="client">
+	<tr>
+	<th th:text="#{number}"></th>
+	<th th:text="#{departure.date}"></th>
+	<th th:text="#{departure.place}"></th>
+	<th th:text="#{arrival.date}"></th>
+	<th th:text="#{arrival.place}"></th>
+	<th th:text="#{flight.number}"></th>
+	<th th:text="#{price}"></th>
+	<th th:text="#{cancel}"></th>
+	</tr>
+	<tr th:each="ticket : ${orderedTickets}">
+	<td th:utext="${ticketStat.count}" th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext="${ticket.departureDate}" th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext=${ticket.departurePlace} th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext="${ticket.arrivalDate}" th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext=${ticket.arrivalPlace} th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext=${ticket.flightNumber} th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:utext=${ticket.price} th:classappend="${ticketStat.odd} ? '' : 'colored'"></td>
+	<td th:classappend="${ticketStat.odd} ? '' : 'colored'"><a th:onclick="'cancelTicket(\'' + ${ticket.id} + '\');'" th:text="#{delete}"></a></td>
+	</tr>
+
+</table>
+
+
+
+</div>
+</body>
+</html>

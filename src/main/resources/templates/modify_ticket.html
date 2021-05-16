@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/main_admin">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{title}"></title>
+</head>
+<body>
+
+<div layout:fragment="modify_ticket">
+<h1 th:text="#{modify.ticket}"></h1>
+
+<table>
+	<tr>
+	<th th:text="#{departure.date}"></th>
+	<th th:text="#{departure.place}"></th>
+	<th th:text="#{arrival.date}"></th>
+	<th th:text="#{arrival.place}"></th>
+	<th th:text="#{flight.number}"></th>
+	<th th:text="#{price}"></th>
+	<th th:text="#{modify}"></th>
+	<th th:text="#{cancel}"></th>
+	</tr>
+	
+	<tr>
+	<td th:if="${lang == 'hu'}">
+	<input type="number"  id="mod_dep_year" onchange="setArrivalDate()" class="modify_field" min="0" th:value="${dep_year}">
+ 	<input type="number" id="mod_dep_month" onchange="setArrivalDate()" class="modify_field" min="1" max="12" th:value="${dep_month}">
+	<input type="number" id="mod_dep_day" onchange="setArrivalDate()" class="modify_field" min="1" max="31" th:value="${dep_day}">
+	</td>
+	<td th:if="${lang == 'en'}">
+	<input type="number" id="mod_dep_day"  onchange="setArrivalDate()" class="modify_field" min="1" max="31" th:value="${dep_day}">
+ 	<input type="number" id="mod_dep_month"  onchange="setArrivalDate()" class="modify_field" min="1" max="12" th:value="${dep_month}">
+	<input type="number"  id="mod_dep_year"onchange="setArrivalDate()" class="modify_field" min="0" th:value="${dep_year}">
+	</td>
+	<td>
+	<select id="mod_dep_place">
+	<option th:each="place : ${departurePlaces}" th:if="${departurePlace == place}" th:text="${place}" selected="selected"></option>
+	<option th:each="place : ${departurePlaces}" th:unless="${departurePlace == place}" th:text="${place}"></option>
+	</select>
+	</td>
+	<td>
+	<input type="text" id="mod_arr_date" class="modify_field" disabled="disabled">
+	</td>
+	<td>
+	<select id="mod_arr_place">
+	<option th:each="place : ${arrivalPlaces}" th:if="${arrivalPlace == place}" th:text="${place}" selected="selected"></option>
+	<option th:each="place : ${arrivalPlaces}" th:unless="${arrivalPlace == place}" th:text="${place}"></option>
+	</select>
+	</td>
+	<td>
+	<select id="mod_flying_number">
+	<option th:each="number : ${flightNumbers}" th:if="${flightNumber == number}" th:text="${number}" selected="selected"></option>
+	<option th:each="number : ${flightNumbers}" th:unless="${flightNumber == number}" th:text="${number}"></option>
+	</select>
+	</td>
+	<td><input id="mod_price" type="number" class="modify_field" min="0" step="500" th:value="${price}"> </td>
+	<td><a th:onclick="sendModifiedTicket()" th:text="#{modify}"></a></td>
+	<td><a th:onclick="cancelModifyingTicket()" th:text="#{cancel}"></a></td>
+	</tr>
+
+</table>
+
+<form th:action="@{/admin/ticket/setModifiedTicket}" method="post" th:object="${ticket}" id="modified_ticket_form">
+<input type="hidden" th:value="${passengerId}" name="passengerId" id="passengerId">
+<input type="hidden" th:value="${ticketId}" name="ticketId" id="ticketId">
+<input type="hidden" id="dep_date" th:field="*{{departureDate}}">
+<input type="hidden" id="dep_place" th:field="*{departurePlace}">
+<input type="hidden" id="arr_date" th:field="*{{arrivalDate}}">
+<input type="hidden" id="arr_place" th:field="*{arrivalPlace}">
+<input type="hidden" id="flying_number" th:field="*{flightNumber}">
+<input type="hidden" id="price" th:field="*{price}">
+</form>
+
+</div>
+</body>
+</html>

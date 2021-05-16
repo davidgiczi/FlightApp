@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/flight-css/flight.css}">
+<title></title>
+</head>
+<body>
+<input id="search-value" type="hidden" th:value="${txt}">
+
+<select id="langSelect" onchange="setLanguage()">
+<option th:value="#{lang}" th:text="#{lang}"></option>
+<option th:if="#{lang} == 'HU'">EN</option>
+<option th:if="#{lang} == 'EN'">HU</option>
+</select>
+<br><br>
+<a id="signout" sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{sign.out}"></a>
+<br><br>
+<div id="auth" sec:authorize="isAuthenticated()">
+ <span th:text="#{auth}"></span><b><span sec:authentication="name"></span></b></div>
+ 
+ 
+ <div id="options" sec:authorize="isAuthenticated()">
+ <a th:href="@{/flight/order}" th:text="#{order.form}"></a>&nbsp;&nbsp;&nbsp;
+ <a th:href="@{/flight/reservations}" th:text="#{orders}"></a>&nbsp;&nbsp;&nbsp;
+ <a th:text="#{change.password}" th:onclick="changePassword()"></a>&nbsp;&nbsp;&nbsp;
+ <input id="search-field" th:onkeyup="'searchTicketByPassenger()'" type="text" th:placeholder="#{search}">
+ <input type="hidden" th:value="#{change.password.msg}" id="newPwdMsg">
+ <input type="hidden" th:value="#{password.error}" id="newPwdError">
+ <input type="hidden" th:value="#{password.correct}" id="newPwdCorrect"> 
+</div>
+
+<form th:action="@{/flight/changePassword}" method="post" id="changePassForm">
+<input type="hidden" name="pass" id="changePass"/>
+</form>
+
+<div layout:fragment="auth/login"></div>
+<div layout:fragment="reservations"></div>
+<div layout:fragment="regist"></div>
+<div layout:fragment="order"></div>
+
+</body>
+<script type="text/javascript" th:src="@{/flight-js/flight-js.js}"></script>
+</html>

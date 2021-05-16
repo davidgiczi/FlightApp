@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+body{
+	background-color: #E6E6FA;
+	font-family: Helvetica;
+}
+
+table{
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+th{
+	background-color: #FFCCFF;
+	border: solid 1px gray;
+	border-collapse: collapse;
+	text-align: center;
+	color:  #606060;
+}	
+	
+table, td{
+	background-color:white;
+	border: solid 1px gray;
+	border-collapse: collapse;
+	text-align: center;
+	color:  gray;
+}
+
+h1{
+	font-size: 38px;
+	color: white;
+	text-align: center;
+}
+
+ h4{
+	color: gray;
+	text-align: center;
+}
+
+#empty{
+	text-align: center;
+	color: #BA55D3;
+	font-style: italic;
+}
+
+#login, .error{
+	background-color: white;
+	text-align: center;
+	height: 260px;
+	width: 300px;
+	margin: auto;
+	border-radius: 10px;
+	border: solid 1px lightgray;
+}
+#auth{
+	float: right;
+	color: #4B0082;
+}
+
+#langSelect, #signout{
+	float: right;
+	cursor: pointer;
+	}
+#registForm{
+	background-color: white;
+	text-align: center;
+	height: 750px;
+	width: 500px;
+	text-align: center;
+	border-radius: 10px;
+	margin: auto;
+ 	border: solid 1px lightgray;
+}
+#username-correct,
+#username-error,
+#password-info,
+#password-error,
+#password-correct,
+#passwords-equal,
+#passwords-non-equal {
+	font-family: Helvetica;
+	font-size: 12px;
+	}
+#error {
+	font-family: Helvetica;
+	font-size: 12px;
+	color: red;
+	}
+#logout {
+	font-family: Helvetica;
+	font-size: 12px;
+	color: green;
+	}
+hr{
+	background-color: lightgray;
+	border-color: lightgray;
+}
+.modify_field{
+	width: 65px;
+	height:20px;
+	background-color: white;
+}
+ input{
+	background-color: lightgray;
+	height: 30px;
+	border-radius: 5px;
+}
+
+input[type=button], input[type=submit]{
+	width: 15em;
+	cursor: pointer;
+}
+
+a {
+	font-family: Helvetica;
+	font-size: 15px;
+	color:  #4B0082;
+	cursor: pointer;
+}
+.selection{
+	width: 300px;
+	height: 35px;
+	cursor: pointer;
+	border-radius: 5px;
+	background-color: lightgray;
+}
+.colored{
+	background-color: #d2f8d2;
+}
+
+#search-field{
+	background-color: lightgray;
+	height: 20px;
+	width: 120px;
+	border-radius: 5px;
+	text-align: center;
+}
+

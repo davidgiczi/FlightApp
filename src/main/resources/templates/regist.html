@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/main_user">
+<head>
+
+<meta charset="UTF-8">
+<title th:text="#{title}"></title>
+</head>
+<body>
+
+<div layout:fragment="regist">
+<h1 th:text="#{registration}"></h1>
+<a th:href="@{/login}" th:text="#{go.login}"></a>
+<hr>
+<br>
+<div id="registForm">
+<br>
+
+<br>
+<form th:action="@{/flight/reg}" method="post" th:object="${user}" id="regForm">
+<h4 th:text="#{firstname}"></h4>
+<input type="text" id="fname" name="firstname" th:field="*{firstName}" size="50" autofocus="autofocus"/><br>
+<h4 th:text="#{lastname}"></h4>
+<input type="text" id="lname" name="lastname" th:field="*{lastName}" size="50"/><br>
+<h4 th:text="#{birth}"></h4>
+<input type="date" id="bdate" name="birthdate" th:field="*{{dateOfBirth}}"/><br>
+<h4 th:text="#{user}"></h4>
+<input type="email" id="uname" name="username" size="50" th:field="*{userName}" th:placeholder="#{email}"/>
+<div id="username-error"></div>
+<div id="username-correct"></div>
+<h4 th:text="#{pass}"></h4>
+<input type="password" id="pass" name="pass" size="50"/><br>
+<div id="password-error"></div>
+<div id="password-correct"></div>
+<div id="password-info"></div>
+<h4 th:text="#{passagain}"></h4>
+<input type="password" id="passagain" onmouseout="isOK()" name="pass" size="50" th:field="*{password}"/><br>
+<div id="passwords-non-equal"></div>
+<div id="passwords-equal"></div>
+<br><br><br>
+</form>
+<input type="button" id=regist-submit-btn onclick="isOk()" th:value="#{send}"/>
+<br>
+
+</div>
+
+<input type="hidden" id="username-correct-msg" th:value="#{username.correct}"/>
+<input type="hidden" id="username-error-msg" th:value="#{username.error}"/>
+<input type="hidden" id="password-correct-msg" th:value="#{password.correct}"/>
+<input type="hidden" id="password-error-msg" th:value="#{password.error}"/>
+<input type="hidden" id="password-info-msg" th:value="#{password.info}"/>
+<input type="hidden" id="passwords-non-equal-msg" th:value="#{passwords.non.equal}"/>
+<input type="hidden" id="passwords-equal-msg" th:value="#{passwords.equal}"/>
+<input type="hidden" id="usrnameExists" th:if="${param.exists}" th:value="#{username.already.exists}"/>
+
+	
+</div>
+
+
+</body>
+</html>

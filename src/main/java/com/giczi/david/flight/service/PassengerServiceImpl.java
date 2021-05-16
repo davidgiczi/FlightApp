@@ -69,7 +69,7 @@ public class PassengerServiceImpl implements PassengerService, UserDetailsServic
 		passengerToRegister.setEnabled(false);
 		String activationKey = generatedKey();
 		passengerToRegister.setActivation(activationKey);
-		//emailService.sendMeassage(passengerToRegister.getUserName(), passengerToRegister.getFirstName(), passengerToRegister.getLastName(), activationKey);
+		emailService.sendMeassage(passengerToRegister.getUserName(), passengerToRegister.getFirstName(), passengerToRegister.getLastName(), activationKey);
 		//passengerToRegister.setPassword(EncoderService.getBCryptEncoder().encode(passengerToRegister.getPassword()));
 		passengerToRegister.setPassword(EncoderService.encodeByBase64(passengerToRegister.getPassword()));
 		passengerRepo.save(passengerToRegister);
